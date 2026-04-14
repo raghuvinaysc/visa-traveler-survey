@@ -11,7 +11,7 @@
 // 7. Paste it into survey-app/app.js as SHEETS_ENDPOINT
 // ========================================
 
-const SHEET_ID = ''; // <-- Paste your Google Sheet ID here
+const SHEET_ID = '1LnOszU4Lt3b4hhiymCvTItYUPDYOX7cI1gg3Ji6Lc48';
 
 function doPost(e) {
   try {

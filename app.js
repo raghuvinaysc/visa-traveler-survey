@@ -88,6 +88,8 @@ function bindBack() {
 
 // Submit data to backend
 function submitData() {
+  if (state.responses._submitted) return;
+  state.responses._submitted = true;
   state.responses._screenTimes = state.screenTimes;
   state.responses._totalTime = (Date.now() - state.startTime) / 1000;
 
@@ -176,8 +178,7 @@ function renderScreen2() {
       ${backBtn(state.screen)}
       ${dots(state.screen)}
       <div class="screen-question">Planning your ${c('{country}')} trip</div>
-      <div class="screen-sub">Tap each step in the order you'd actually do them.</div>
-      <div class="tap-hint">Tap each step in the order you'd do it. Tap again to undo.</div>
+      <div class="screen-sub">Tap each step in order. Tap again to undo.</div>
       <div id="tapList">
         ${items.map((item, i) => `
           <div class="tap-item" data-index="${i}" data-text="${item}">
@@ -428,10 +429,9 @@ function bindEvents() {
   // Renderer order: [screen0, screen2, screen1, screen3, screen4, screen5, screen6, screen7, screen8]
   // So s=0→country, s=1→planning, s=2→firstmove, s=3→agent, s=4→why, s=5→moment, s=6→trust, s=7→crisis, s=8→onething
 
-  // Screen 0: Country pick (keep button — needs search + deliberation)
+  // Screen 0: Country pick (auto-advance on tap)
   if (s === 0) {
     const cards = document.querySelectorAll('.country-card');
-    const btn = document.getElementById('btnNext');
     const search = document.getElementById('countrySearch');
 
     cards.forEach(card => {
@@ -453,6 +453,14 @@ function bindEvents() {
       cards.forEach(card => {
         const name = card.dataset.name.toLowerCase();
         card.style.display = name.includes(q) ? '' : 'none';
+      });
+      // Hide section labels if all cards in that section are hidden
+      document.querySelectorAll('.country-section-label').forEach(label => {
+        const grid = label.nextElementSibling;
+        if (grid) {
+          const visibleCards = grid.querySelectorAll('.country-card:not([style*="display: none"])');
+          label.style.display = visibleCards.length ? '' : 'none';
+        }
       });
     });
   }
