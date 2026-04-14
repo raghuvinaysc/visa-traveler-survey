@@ -89,19 +89,12 @@ function bindBack() {
 }
 
 // Submit data to backend
-function submitData() {
-  if (state.responses._submitted) return;
-  state.responses._submitted = true;
+// Submit partial or final data to Google Sheets
+function submitData(isFinal) {
   state.responses._screenTimes = state.screenTimes;
   state.responses._totalTime = (Date.now() - state.startTime) / 1000;
-
-  // Always log to console
-  console.log('Survey data:', JSON.stringify(state.responses, null, 2));
-
-  // Save to localStorage as backup
-  const allResponses = JSON.parse(localStorage.getItem('visa_survey_responses') || '[]');
-  allResponses.push(state.responses);
-  localStorage.setItem('visa_survey_responses', JSON.stringify(allResponses));
+  state.responses._lastScreen = state.screen;
+  state.responses._completed = isFinal ? true : false;
 
   // POST to Google Sheets if endpoint is configured
   if (SHEETS_ENDPOINT) {
@@ -112,6 +105,15 @@ function submitData() {
       body: JSON.stringify(state.responses)
     }).catch(err => console.warn('Failed to POST to sheets:', err));
   }
+
+  // Also log to console
+  if (isFinal) console.log('Survey COMPLETE:', JSON.stringify(state.responses, null, 2));
+}
+
+// Save + submit at every screen transition (captures drop-offs)
+function saveAndSubmit(key, value) {
+  save(key, value);
+  submitData(false); // partial submission
 }
 
 // ===================== SCREEN RENDERERS =====================
@@ -376,7 +378,7 @@ function renderScreen8() {
 
 function renderThankYou() {
   trackScreen('thankyou');
-  submitData();
+  submitData(true); // final submission
   return `
     <div class="screen" style="justify-content:center; text-align:center;">
       <div style="font-size:48px; margin-bottom:16px;">\u2708\uFE0F</div>
@@ -386,15 +388,7 @@ function renderThankYou() {
       <div class="thankyou-card" style="text-align:left;">
         <h4>Did you know?</h4>
         <p>Scapia also helps with visas. Get your ${state.countryName} visa starting from the best price.</p>
-        <a href="https://www.scapia.com" class="cta-link" target="_blank">Explore Scapia Visas \u2192</a>
-      </div>
-
-      <div class="thankyou-card" style="text-align:left;">
-        <h4>Want to share more?</h4>
-        <p>We'd love a quick 15-min chat about your visa experiences.</p>
-        <input type="text" id="contactInput" placeholder="Your email or WhatsApp number" style="margin-top:8px;">
-        <button class="btn-next secondary" id="contactBtn" style="margin-top:8px; font-size:14px;">I'm open to a chat</button>
-        <p style="font-size:11px; color:#B5AFA6; margin-top:8px;">Raghu from Scapia will reach out — raghu@scapia.cards</p>
+        <a href="https://scapia.onelink.me/OTN6/06t60rfv" class="cta-link" target="_blank">Explore Scapia Visas \u2192</a>
       </div>
     </div>
   `;
@@ -446,7 +440,7 @@ function bindEvents() {
         state.flow = parseInt(card.dataset.flow);
         const mobile = document.getElementById('mobileInput')?.value?.trim();
         if (mobile) save('mobile', mobile);
-        save('country', state.countryName);
+        saveAndSubmit('country', state.countryName);
         save('flow', state.flow);
         setTimeout(() => goTo(1), 300);
       });
@@ -500,7 +494,7 @@ function bindEvents() {
     btn.addEventListener('click', () => {
       const order = sequence.map(el => el.dataset.text);
       save('planning_sequence', order);
-      save('visa_position', order.findIndex(t => t.toLowerCase().includes('visa')) + 1);
+      saveAndSubmit('visa_position', order.findIndex(t => t.toLowerCase().includes('visa')) + 1);
       goTo(2);
     });
   }
@@ -512,7 +506,7 @@ function bindEvents() {
       card.addEventListener('click', () => {
         cards.forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
-        autoAdvance('first_move', card.dataset.id, 3);
+        save('first_move', card.dataset.id); submitData(false); setTimeout(() => goTo(3), 400); return; //, card.dataset.id, 3);
       });
     });
   }
@@ -554,7 +548,7 @@ function bindEvents() {
     btn.addEventListener('click', () => {
       save('agent_id', state.responses.agent_id);
       save('agent_play', state.responses.agent_play);
-      save('agent_name', state.responses.agent_name);
+      saveAndSubmit('agent_name', state.responses.agent_name);
       const positions = [...cards].map(c => c.dataset.id);
       save('agent_card_positions', positions);
       goTo(4);
@@ -598,7 +592,7 @@ function bindEvents() {
       const neverCard = document.querySelector('.never-card.selected');
       save('never_agent', neverCard?.dataset.id);
       save('never_name', neverCard?.dataset.name);
-      save('why_not_text', document.getElementById('whyNotText').value);
+      saveAndSubmit('why_not_text', document.getElementById('whyNotText').value);
       goTo(5);
     });
   }
@@ -610,7 +604,7 @@ function bindEvents() {
       opt.addEventListener('click', () => {
         options.forEach(o => o.classList.remove('selected'));
         opt.classList.add('selected');
-        autoAdvance('moment_response', opt.dataset.id, 6);
+        save('moment_response', opt.dataset.id); submitData(false); setTimeout(() => goTo(6), 400); return; //, opt.dataset.id, 6);
       });
     });
   }
@@ -628,7 +622,7 @@ function bindEvents() {
     });
     btn.addEventListener('click', () => {
       const selected = document.querySelector('.trust-card.selected');
-      save('trust_signal', selected?.dataset.id);
+      saveAndSubmit('trust_signal', selected?.dataset.id);
       goTo(7);
     });
   }
@@ -640,7 +634,7 @@ function bindEvents() {
       card.addEventListener('click', () => {
         cards.forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
-        autoAdvance('crisis_response', card.dataset.id, 8);
+        save('crisis_response', card.dataset.id); submitData(false); setTimeout(() => goTo(8), 400); return; //, card.dataset.id, 8);
       });
     });
   }
@@ -655,7 +649,7 @@ function bindEvents() {
     });
 
     btn.addEventListener('click', () => {
-      save('one_thing', textarea.value);
+      saveAndSubmit('one_thing', textarea.value);
       goTo(9);
     });
   }
