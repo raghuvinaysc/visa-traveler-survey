@@ -236,8 +236,9 @@ function renderScreen3() {
           </div>
         `).join('')}
       </div>
-      <div style="height:20px"></div>
-      <button class="btn-next" id="btnNext" disabled>Pick one to continue</button>
+      <div class="btn-sticky-wrap">
+        <button class="btn-next" id="btnNext" disabled>Pick one to continue</button>
+      </div>
     </div>
   `;
 }
