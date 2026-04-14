@@ -101,7 +101,7 @@ const MOMENT_SCENARIOS = {
 const TRUST_SIGNALS = {
   1: [
     {id:"friend",icon:"\u{1F46B}",text:"A friend or family member used this"},
-    {id:"reviews",icon:"\u2B50",text:"Thousands of positive reviews"},
+    {id:"reviews",icon:"\u2B50",text:"10,000+ positive reviews"},
     {id:"digilocker",icon:"\u{1F512}",text:"Verified by DigiLocker"},
     {id:"price",icon:"\u{1F4B3}",text:"Total price was clear before I started"},
     {id:"guarantee",icon:"\u{1F6E1}\uFE0F",text:"Money-back if visa doesn't arrive on time"},
@@ -109,7 +109,7 @@ const TRUST_SIGNALS = {
   ],
   2: [
     {id:"friend",icon:"\u{1F46B}",text:"A friend or family member used this"},
-    {id:"reviews",icon:"\u2B50",text:"Thousands of positive reviews"},
+    {id:"reviews",icon:"\u2B50",text:"10,000+ positive reviews"},
     {id:"digilocker",icon:"\u{1F512}",text:"Verified by DigiLocker"},
     {id:"price",icon:"\u{1F4B3}",text:"Total price was clear before I started"},
     {id:"guarantee",icon:"\u{1F6E1}\uFE0F",text:"Money-back if visa doesn't arrive on time"},

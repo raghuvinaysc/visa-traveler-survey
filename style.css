@@ -318,6 +318,13 @@ textarea::placeholder, input::placeholder { color: #B5AFA6; }
 .btn-next:disabled { background: #D4CFC7; color: #fff; cursor: not-allowed; box-shadow: none; }
 .btn-next.secondary { background: transparent; color: #2A6B5E; border: 1.5px solid #2A6B5E; box-shadow: none; }
 
+/* Sticky CTA for agent screen */
+.btn-sticky-wrap {
+  position: sticky; bottom: 0; left: 0; right: 0;
+  padding: 12px 0 24px; background: linear-gradient(transparent, #F5F0EB 30%);
+  z-index: 5;
+}
+
 /* Thank you */
 .thankyou-card {
   background: #fff; border: 1.5px solid #E8E4DE; border-radius: 16px;
