@@ -236,9 +236,8 @@ function renderScreen3() {
           </div>
         `).join('')}
       </div>
-      <div class="btn-sticky-wrap">
-        <button class="btn-next" id="btnNext" disabled>Pick one to continue</button>
-      </div>
+      <div style="height:20px"></div>
+      <button class="btn-next" id="btnNext" disabled>Pick one to continue</button>
     </div>
   `;
 }
@@ -289,8 +288,9 @@ function renderScreen4() {
       <div class="label-small" style="margin-top:16px">Why not? <span style="color:#D4CFC7">(optional)</span></div>
       <textarea id="whyNotText" rows="2" placeholder="One sentence..."></textarea>
 
-      <div style="height:20px"></div>
-      <button class="btn-next" id="btnNext" disabled>Next</button>
+      <div class="btn-sticky-wrap">
+        <button class="btn-next" id="btnNext" disabled>Next</button>
+      </div>
     </div>
   `;
 }
