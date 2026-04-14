@@ -120,8 +120,10 @@ function renderScreen0() {
   return `
     <div class="screen">
       ${dots(state.screen)}
-      <div class="screen-question">Where do you want to travel next?</div>
-      <div class="screen-sub">Pick the destination that excites you most.</div>
+      <div class="screen-question">Where are you planning your next trip?</div>
+      <div class="screen-sub">Pick a destination.</div>
+      <div class="label-small" style="margin-bottom:4px;">Your mobile number <span style="color:#B5AFA6">(so we can share what we learn)</span></div>
+      <input type="tel" class="country-search" placeholder="e.g. 9876543210" id="mobileInput" autocomplete="tel" style="margin-bottom:16px;" maxlength="10" inputmode="numeric">
       <input type="text" class="country-search" placeholder="Search countries..." id="countrySearch" autocomplete="off">
       <div id="countryList">
         <div class="country-section-label">Popular</div>
@@ -438,6 +440,8 @@ function bindEvents() {
         card.classList.add('selected');
         state.countryName = card.dataset.name;
         state.flow = parseInt(card.dataset.flow);
+        const mobile = document.getElementById('mobileInput')?.value?.trim();
+        if (mobile) save('mobile', mobile);
         save('country', state.countryName);
         save('flow', state.flow);
         setTimeout(() => goTo(1), 300);

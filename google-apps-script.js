@@ -21,7 +21,7 @@ function doPost(e) {
     // Create header row if sheet is empty
     if (sheet.getLastRow() === 0) {
       const headers = [
-        'timestamp', 'uid', 'country', 'flow',
+        'timestamp', 'uid', 'mobile', 'country', 'flow',
         'planning_sequence', 'visa_position',
         'first_move',
         'agent_id', 'agent_play', 'agent_name', 'agent_card_positions',
@@ -40,6 +40,7 @@ function doPost(e) {
     const row = [
       data._timestamp || new Date().toISOString(),
       data._uid || 'unknown',
+      data.mobile || '',
       data._country || '',
       data._flow || '',
       JSON.stringify(data.planning_sequence || []),
