@@ -397,10 +397,10 @@ function renderThankYou() {
 
 function render() {
   const app = document.getElementById('app');
-  // Order: Country → Planning Sequence → First Move → Agent → Why → Moment → Trust → Crisis → One Thing
+  // Order: Country → Planning → First Move → Agent → Why/Never → Before Paying → Moment → Trust → One Thing
   const renderers = [
     renderScreen0, renderScreen2, renderScreen1, renderScreen3,
-    renderScreen4, renderScreen5, renderScreen6, renderScreen7,
+    renderScreen4, renderScreen7, renderScreen5, renderScreen6,
     renderScreen8
   ];
 
