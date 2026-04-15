@@ -29,6 +29,7 @@ const COUNTRIES = [
   { name: "Switzerland", flag: "\u{1F1E8}\u{1F1ED}", flow: 4, rank: 42 },
   { name: "Netherlands", flag: "\u{1F1F3}\u{1F1F1}", flow: 4, rank: 43 },
   { name: "Spain", flag: "\u{1F1EA}\u{1F1F8}", flow: 4, rank: 44 },
+  { name: "United States", flag: "\u{1F1FA}\u{1F1F8}", flow: 4, rank: 45, popular: true },
   { name: "Armenia", flag: "\u{1F1E6}\u{1F1F2}", flow: 2, rank: 38 },
   { name: "Ethiopia", flag: "\u{1F1EA}\u{1F1F9}", flow: 2, rank: 39 },
 ];
