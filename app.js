@@ -1,7 +1,7 @@
 // ===================== CONFIG =====================
 // Set this to your Google Apps Script deployment URL after deploying google-apps-script.js
 // Leave empty to use console.log only (for testing)
-const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxUBNhx9t37NwqctRn052ObsLTCKV8OlgvcMQyfG6MWV1nxY8JOSUL90oz1mB-Dcm81EQ/exec';
+const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyUR4SVC9MQEjLecL1gRToOpD9myEg5OBaiMe0p5GOqXXw4g__PLF_FlBgCHgYsbOLdnw/exec';
 
 // State
 const state = {
