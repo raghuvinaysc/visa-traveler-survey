@@ -35,10 +35,10 @@ const COUNTRIES = [
 
 // ===================== PLANNING ITEMS (per flow, randomized at render) =====================
 const PLANNING_ITEMS = {
-  1: ["Book flights", "Book hotels", "Start applying for the visa", "Plan the itinerary", "Get travel insurance"],
-  2: ["Book flights", "Book hotels", "Start applying for the visa", "Plan the itinerary", "Get travel insurance", "Coordinate with friends"],
-  3: ["Plan the trip", "Book flights", "Book hotels", "Research visa requirements", "Gather documents", "Start applying for the visa"],
-  4: ["Plan the trip", "Book flights", "Book hotels", "Research visa requirements", "Prepare all documents", "Start applying for the visa"]
+  1: ["Book flights", "Book hotels", "Research visa requirements", "Start applying for the visa", "Plan the itinerary for each day"],
+  2: ["Book flights", "Book hotels", "Research visa requirements", "Start applying for the visa", "Plan the itinerary for each day", "Coordinate with friends"],
+  3: ["Book flights", "Book hotels", "Research visa requirements", "Gather documents", "Start applying for the visa", "Plan the itinerary for each day"],
+  4: ["Book flights", "Book hotels", "Research visa requirements", "Prepare all documents", "Start applying for the visa", "Plan the itinerary for each day", "Look for the earliest appointment date"]
 };
 
 // ===================== FIRST MOVE (same across all flows) =====================
