@@ -340,16 +340,15 @@ function renderScreen6() {
 }
 
 function renderScreen7() {
-  trackScreen('crisis');
-  const scenario = c(CRISIS_SCENARIOS[state.flow]);
-  const options = shuffle(CRISIS_OPTIONS);
+  trackScreen('before_paying');
+  const agentName = state.responses.agent_name || 'your chosen agent';
+  const options = shuffle(BEFORE_PAYING_OPTIONS);
   return `
     <div class="screen">
       ${backBtn(state.screen)}
       ${dots(state.screen)}
-      <div class="scenario-box">${scenario}</div>
-      <div class="screen-question">What do you do?</div>
-      <div style="height:12px"></div>
+      <div class="screen-question">You've decided to go with ${agentName}.</div>
+      <div class="screen-sub">Before paying, what's the ONE thing you'd check first?</div>
       ${options.map(o => `
         <div class="move-card" data-id="${o.id}">
           <span class="move-icon">${o.icon}</span>
@@ -627,14 +626,14 @@ function bindEvents() {
     });
   }
 
-  // Screen 7: Crisis (AUTO-ADVANCE on tap)
+  // Screen 7: Before Paying (AUTO-ADVANCE on tap)
   if (s === 7) {
     const cards = document.querySelectorAll('.move-card');
     cards.forEach(card => {
       card.addEventListener('click', () => {
         cards.forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
-        save('crisis_response', card.dataset.id); submitData(false); setTimeout(() => goTo(8), 400); return; //, card.dataset.id, 8);
+        save('before_paying', card.dataset.id); submitData(false); setTimeout(() => goTo(8), 400); return;
       });
     });
   }

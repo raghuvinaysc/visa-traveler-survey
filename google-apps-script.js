@@ -28,7 +28,7 @@ function doPost(e) {
         'why_text', 'never_agent', 'never_name', 'why_not_text',
         'moment_response',
         'trust_signal',
-        'crisis_response',
+        'before_paying',
         'one_thing',
         'contact_info',
         'total_time_seconds', 'screen_times'
@@ -56,7 +56,7 @@ function doPost(e) {
       data.why_not_text || '',
       data.moment_response || '',
       data.trust_signal || '',
-      data.crisis_response || '',
+      data.before_paying || '',
       data.one_thing || '',
       data.contact_info || '',
       data._totalTime || '',

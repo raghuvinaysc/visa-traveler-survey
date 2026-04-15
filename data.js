@@ -134,18 +134,14 @@ const TRUST_SIGNALS = {
   ]
 };
 
-// ===================== CRISIS (flow-specific) =====================
-const CRISIS_SCENARIOS = {
-  1: "You fly to {country} tomorrow. You still haven't sorted the visa situation.",
-  2: "Night before your trip. Your {country} e-visa hasn't arrived in your email.",
-  3: "Your passport is still at the embassy. Trip to {country} is in 4 days. No status update.",
-  4: "It's 11 PM. Your VFS appointment for {country} is tomorrow at 9 AM. You realize you might be missing a document."
-};
-const CRISIS_OPTIONS = [
-  {id:"call",icon:"\u{1F4DE}",text:"Call or message someone immediately"},
-  {id:"app",icon:"\u{1F4F1}",text:"Check the app or website for status"},
-  {id:"google",icon:"\u{1F50D}",text:"Google to figure out what to do"},
-  {id:"whatsapp",icon:"\u{1F4AC}",text:"Ask a friend or WhatsApp group"},
-  {id:"nothing",icon:"\u{1F64F}",text:"Do nothing, hope for the best"},
-  {id:"planner",icon:"\u{1F4CB}",text:"This wouldn't happen to me \u2014 I plan ahead"}
+// ===================== BEFORE PAYING (replaces Crisis — conversion barrier) =====================
+// Same question across all flows. Tests: what's the last barrier before payment?
+const BEFORE_PAYING_OPTIONS = [
+  {id:"reviews",icon:"\u2B50",text:"Read their reviews and ratings online"},
+  {id:"refund_policy",icon:"\u{1F4CB}",text:"Check their refund and cancellation policy"},
+  {id:"ask_friend",icon:"\u{1F4AC}",text:"Ask a friend or family member if they've used them"},
+  {id:"website",icon:"\u{1F4F1}",text:"Browse their website to see if it looks professional and legit"},
+  {id:"experience",icon:"\u{1F4CA}",text:"Check how many visas they've processed and their approval rate"},
+  {id:"compare",icon:"\u{1F50D}",text:"Compare with 2-3 other options before deciding"},
+  {id:"social",icon:"\u{25B6}\u{FE0F}",text:"Search for them on YouTube, Reddit, or social media"}
 ];
