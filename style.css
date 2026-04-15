@@ -160,7 +160,8 @@ body::before {
   font-size: 20px; flex-shrink: 0;
 }
 .ac3-info { flex: 1; min-width: 0; }
-.ac3-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; color: #1A1A1A; }
+.ac3-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 600; color: #1A1A1A; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ac3-channel { font-family: 'DM Sans', sans-serif; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: #7A7267; background: #F3F0EB; padding: 2px 6px; border-radius: 4px; }
 .ac3-promise { font-size: 12px; color: #4A4540; line-height: 1.4; margin-top: 2px; }
 .ac3-price-col { text-align: right; flex-shrink: 0; }
 .ac3-price { font-size: 16px; font-weight: 700; color: #1A1A1A; letter-spacing: -0.3px; }

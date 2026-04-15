@@ -212,7 +212,7 @@ function renderScreen3() {
             <div class="ac3-header">
               <div class="ac3-avatar" style="background:${a.color}">${a.icon}</div>
               <div class="ac3-info">
-                <div class="ac3-name">${a.name}</div>
+                <div class="ac3-name">${a.name} ${a.channel ? '<span class="ac3-channel">' + a.channel + '</span>' : ''}</div>
                 <div class="ac3-promise">${c(a.promise)}</div>
               </div>
               <div class="ac3-price-col">
